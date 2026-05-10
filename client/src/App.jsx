@@ -43,7 +43,7 @@ function App() {
       <ThemeProvider>
         <AuthProvider>
           <Toaster
-            position="top-right"
+            position="top-center"
             toastOptions={{
               style: {
                 background: 'rgba(255,255,255,0.1)',
