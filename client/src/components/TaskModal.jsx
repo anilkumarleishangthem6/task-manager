@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 
 const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
   const { isDark } = useTheme();
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('medium');
@@ -11,6 +12,7 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
   const [dueDate, setDueDate] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Populate form fields when editing an existing task
   useEffect(() => {
     if (editTask) {
       setTitle(editTask.title);
@@ -31,38 +33,52 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await onSubmit({ title, description, priority, status, dueDate: dueDate || null });
+      await onSubmit({
+        title,
+        description,
+        priority,
+        status,
+        dueDate: dueDate || null,
+      });
       onClose();
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error('Failed to save task:', err);
     } finally {
       setLoading(false);
     }
   };
 
-  if (!isOpen) return null;
+  // Shared input styling based on current theme
+  const inputClass = `w-full px-4 py-3 rounded-xl text-sm outline-none transition border border-transparent focus:border-purple-500 ${
+    isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'
+  }`;
 
-  const inputClass = `w-full px-4 py-3 rounded-xl text-sm outline-none transition border border-transparent focus:border-purple-500 ${isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'}`;
   const labelClass = `block text-sm font-medium mb-2 ${isDark ? 'text-white/70' : 'text-slate-600'}`;
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className={`w-full max-w-md rounded-2xl p-6 shadow-2xl ${isDark ? 'glass' : 'glass-light'}`}>
-        
-        {/* Header */}
+
+        {/* Modal header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className={`font-bold text-xl ${isDark ? 'text-white' : 'text-slate-800'}`}>
             {editTask ? 'Edit Task' : 'Create New Task'}
           </h2>
           <button
             onClick={onClose}
-            className={`p-2 rounded-xl transition ${isDark ? 'glass text-white/50 hover:text-white' : 'glass-light text-slate-400 hover:text-slate-600'}`}
+            className={`p-2 rounded-xl transition ${
+              isDark ? 'glass text-white/50 hover:text-white' : 'glass-light text-slate-400 hover:text-slate-600'
+            }`}
           >
             <X size={18} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Task title */}
           <div>
             <label className={labelClass}>Title *</label>
             <input
@@ -75,6 +91,7 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
             />
           </div>
 
+          {/* Task description */}
           <div>
             <label className={labelClass}>Description</label>
             <textarea
@@ -86,6 +103,7 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
             />
           </div>
 
+          {/* Priority and status side by side */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className={labelClass}>Priority</label>
@@ -113,6 +131,7 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
             </div>
           </div>
 
+          {/* Due date */}
           <div>
             <label className={labelClass}>Due Date</label>
             <input
@@ -123,18 +142,21 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
             />
           </div>
 
+          {/* Form actions */}
           <div className="flex gap-3 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className={`flex-1 py-3 rounded-xl text-sm font-medium transition ${isDark ? 'glass text-white/70 hover:text-white' : 'glass-light text-slate-600 hover:text-slate-800'}`}
+              className={`flex-1 py-3 rounded-xl text-sm font-medium transition ${
+                isDark ? 'glass text-white/70 hover:text-white' : 'glass-light text-slate-600 hover:text-slate-800'
+              }`}
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 gradient-btn text-white font-semibold py-3 rounded-xl transition shadow-lg disabled:opacity-60"
+              className="flex-1 gradient-btn text-white font-semibold py-3 rounded-xl shadow-lg disabled:opacity-60"
             >
               {loading ? 'Saving...' : editTask ? 'Update Task' : 'Create Task'}
             </button>

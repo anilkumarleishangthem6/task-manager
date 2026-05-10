@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
-/* Dark mode gradient background */
+/* Base body styling for both themes */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #ddd6fe 100%);
+}
+
+/* Dark mode overrides body background */
 .dark body {
   background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-  min-height: 100vh;
 }
 
-/* Light mode gradient background */
-body {
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #ddd6fe 100%);
-  min-height: 100vh;
-}
-
-/* Glass card effect */
+/* Glassmorphism card — dark version */
 .glass {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(20px);
@@ -20,6 +19,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Glassmorphism card — light version */
 .glass-light {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(20px);
@@ -27,7 +27,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
-/* Gradient text */
+/* Purple to cyan gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #a855f7, #06b6d4);
   -webkit-background-clip: text;
@@ -35,17 +35,17 @@ body {
   background-clip: text;
 }
 
-/* Gradient button */
+/* Purple to cyan gradient button */
 .gradient-btn {
   background: linear-gradient(135deg, #a855f7, #06b6d4);
   transition: opacity 0.2s ease;
 }
 
 .gradient-btn:hover {
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
-/* Scrollbar */
+/* Custom scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
 }

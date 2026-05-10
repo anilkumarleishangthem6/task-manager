@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Check for existing session on app load
   useEffect(() => {
     const token = localStorage.getItem('token');
     const savedUser = localStorage.getItem('user');
@@ -32,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     return res.data;
   };
 
+  // Clear user session on logout
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

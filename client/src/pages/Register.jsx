@@ -10,6 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
   const { register } = useAuth();
   const { isDark, toggleTheme } = useTheme();
   const navigate = useNavigate();
@@ -25,20 +26,30 @@ const Register = () => {
       await register(name, email, password);
       toast.success('Account created successfully!');
       navigate('/dashboard');
-    } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Registration failed');
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className={`min-h-screen flex items-center justify-center p-4 ${isDark ? 'bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e]' : 'bg-gradient-to-br from-indigo-100 via-purple-50 to-cyan-100'}`}>
+  const inputClass = `w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition border border-transparent focus:border-purple-500 ${
+    isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'
+  }`;
 
-      {/* Theme toggle */}
+  return (
+    <div className={`min-h-screen flex items-center justify-center p-4 ${
+      isDark
+        ? 'bg-[linear-gradient(135deg,#0f0c29,#302b63,#24243e)]'
+        : 'bg-[linear-gradient(135deg,#e0e7ff,#c7d2fe,#ddd6fe)]'
+    }`}>
+
+      {/* Theme toggle button */}
       <button
         onClick={toggleTheme}
-        className={`fixed top-4 right-4 p-2 rounded-xl transition ${isDark ? 'glass text-yellow-400' : 'glass-light text-slate-600'}`}
+        className={`fixed top-4 right-4 p-2 rounded-xl transition ${
+          isDark ? 'glass text-yellow-400' : 'glass-light text-slate-600'
+        }`}
       >
         {isDark ? <Sun size={18} /> : <Moon size={18} />}
       </button>
@@ -59,6 +70,7 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Name field */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-white/70' : 'text-slate-600'}`}>
               Full Name
@@ -69,13 +81,14 @@ const Register = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition ${isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'} border border-transparent focus:border-purple-500`}
-                placeholder="Your Name"
+                className={inputClass}
+                placeholder="Anil Kumar"
                 required
               />
             </div>
           </div>
 
+          {/* Email field */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-white/70' : 'text-slate-600'}`}>
               Email
@@ -86,13 +99,14 @@ const Register = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition ${isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'} border border-transparent focus:border-purple-500`}
+                className={inputClass}
                 placeholder="you@example.com"
                 required
               />
             </div>
           </div>
 
+          {/* Password field */}
           <div>
             <label className={`block text-sm font-medium mb-2 ${isDark ? 'text-white/70' : 'text-slate-600'}`}>
               Password
@@ -103,7 +117,7 @@ const Register = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className={`w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition ${isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'} border border-transparent focus:border-purple-500`}
+                className={inputClass}
                 placeholder="••••••••"
                 required
               />
@@ -113,7 +127,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full gradient-btn text-white font-semibold py-3 rounded-xl transition shadow-lg disabled:opacity-60"
+            className="w-full gradient-btn text-white font-semibold py-3 rounded-xl shadow-lg disabled:opacity-60"
           >
             {loading ? 'Creating account...' : 'Create Account'}
           </button>
