@@ -100,9 +100,9 @@ const TaskCard = ({ task, onEdit, onDelete, onStatusChange }) => {
           isDark ? 'glass text-white/70' : 'glass-light text-slate-600'
         }`}
       >
-        <option value="todo">To Do</option>
-        <option value="inprogress">In Progress</option>
-        <option value="done">Done</option>
+        <option value="todo" className='bg-slate-800 text-white'>To Do</option>
+        <option value="inprogress" className='bg-slate-800 text-white'>In Progress</option>
+        <option value="done" className='bg-slate-800 text-white'>Done</option>
       </select>
     </div>
   );

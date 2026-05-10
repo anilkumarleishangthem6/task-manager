@@ -171,20 +171,20 @@ const Dashboard = () => {
             onChange={(e) => setFilterStatus(e.target.value)}
             className={selectClass}
           >
-            <option value="">All Status</option>
-            <option value="todo">To Do</option>
-            <option value="inprogress">In Progress</option>
-            <option value="done">Done</option>
+            <option value="" className='bg-slate-800 text-white'>All Status</option>
+            <option value="todo" className='bg-slate-800 text-white'>To Do</option>
+            <option value="inprogress" className='bg-slate-800 text-white'>In Progress</option>
+            <option value="done" className='bg-slate-800 text-white'>Done</option>
           </select>
           <select
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value)}
             className={selectClass}
           >
-            <option value="">All Priority</option>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="" className='bg-slate-800 text-white'>All Priority</option>
+            <option value="low" className='bg-slate-800 text-white'>Low</option>
+            <option value="medium" className='bg-slate-800 text-white'>Medium</option>
+            <option value="high" className='bg-slate-800 text-white'>High</option>
           </select>
           <button
             onClick={() => { setEditTask(null); setModalOpen(true); }}
