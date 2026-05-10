@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -7,13 +8,21 @@ import Dashboard from './pages/Dashboard';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  if (loading) return <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white">Loading...</div>;
+  if (loading) return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center text-white">
+      Loading...
+    </div>
+  );
   return user ? children : <Navigate to="/login" />;
 };
 
 const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  if (loading) return <div className="min-h-screen bg-slate-900 flex items-center justify-center text-white">Loading...</div>;
+  if (loading) return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] flex items-center justify-center text-white">
+      Loading...
+    </div>
+  );
   return user ? <Navigate to="/dashboard" /> : children;
 };
 
@@ -31,19 +40,22 @@ const AppRoutes = () => {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: '#1e293b',
-              color: '#fff',
-              border: '1px solid #334155',
-            },
-          }}
-        />
-        <AppRoutes />
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(10px)',
+                color: '#fff',
+                border: '1px solid rgba(255,255,255,0.2)',
+              },
+            }}
+          />
+          <AppRoutes />
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
