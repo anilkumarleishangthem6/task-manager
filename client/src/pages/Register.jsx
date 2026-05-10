@@ -70,7 +70,7 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className={`w-full pl-10 pr-4 py-3 rounded-xl text-sm outline-none transition ${isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'} border border-transparent focus:border-purple-500`}
-                placeholder="Anil Kumar"
+                placeholder="Your Name"
                 required
               />
             </div>
