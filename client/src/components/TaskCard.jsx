@@ -1,3 +1,5 @@
+import { Pencil, Trash2 } from 'lucide-react';
+
 const priorityColors = {
   low: 'bg-green-500/20 text-green-400 border-green-500/30',
   medium: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
@@ -29,21 +31,21 @@ const TaskCard = ({ task, onEdit, onDelete, onStatusChange }) => {
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && task.status !== 'done';
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-xl p-5 hover:border-slate-500 transition group">
+    <div className="bg-slate-800 border border-slate-700 rounded-xl p-5 hover:border-slate-500 transition">
       <div className="flex items-start justify-between gap-3 mb-3">
         <h3 className="text-white font-semibold text-base leading-snug">{task.title}</h3>
-        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition">
+        <div className="flex gap-2 flex-shrink-0">
           <button
             onClick={() => onEdit(task)}
-            className="text-slate-400 hover:text-blue-400 text-sm transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-blue-400 hover:bg-blue-400/10 transition"
           >
-            ✏️
+            <Pencil size={15} />
           </button>
           <button
             onClick={() => onDelete(task._id)}
-            className="text-slate-400 hover:text-red-400 text-sm transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-red-400/10 transition"
           >
-            🗑️
+            <Trash2 size={15} />
           </button>
         </div>
       </div>
