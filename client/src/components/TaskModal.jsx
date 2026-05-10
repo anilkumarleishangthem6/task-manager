@@ -53,7 +53,7 @@ const TaskModal = ({ isOpen, onClose, onSubmit, editTask }) => {
     isDark ? 'glass text-white placeholder-white/30' : 'glass-light text-slate-800 placeholder-slate-400'
   }`;
 
-  const labelClass = `block text-sm font-medium mb-2 ${isDark ? 'text-white/70' : 'text-slate-600'}`;
+  const labelClass = `block text-sm font-medium mb-2 ${isDark ? 'text-white/70' : 'text-slate-600 light-select'}`;
 
   if (!isOpen) return null;
 

@@ -125,7 +125,7 @@ const Dashboard = () => {
   ];
 
   const selectClass = `px-4 py-3 rounded-xl text-sm outline-none transition border border-transparent focus:border-purple-500 ${
-    isDark ? 'glass text-white/70' : 'glass-light text-slate-600'
+  isDark ? 'glass text-white/70' : 'glass-light text-slate-600 light-select'
   }`;
 
   return (

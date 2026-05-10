@@ -64,7 +64,7 @@ const TaskCard = ({ task, onEdit, onDelete, onStatusChange }) => {
 
       {/* Optional description */}
       {task.description && (
-        <p className={`text-sm mb-3 line-clamp-2 ${isDark ? 'text-white/50' : 'text-slate-500'}`}>
+        <p className={`text-sm mb-3 line-clamp-2 ${isDark ? 'text-white/50 ' : 'text-slate-500 light-select'}`}>
           {task.description}
         </p>
       )}
